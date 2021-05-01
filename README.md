@@ -1,7 +1,7 @@
 # Westworld
 
 ### brief introduction
-这是一个分布式定时调度框架  
+这是一个分布式延时调度框架  
 
 ### high light
 - 扩展性好 
