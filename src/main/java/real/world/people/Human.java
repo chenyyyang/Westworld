@@ -1,4 +1,4 @@
 package real.world.people;
 
-public interface Human {
+public interface Human extends Runnable {
 }

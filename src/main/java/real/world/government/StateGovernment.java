@@ -1,24 +1,14 @@
 package real.world.government;
 
-import cn.hutool.log.StaticLog;
-import org.apache.zookeeper.CreateMode;
-import real.world.land.NationLand;
-import real.world.people.Human;
 import real.world.tools.zkClient.ZKClient;
 import real.world.tools.zkClient.ZKClientBuilder;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class StateGovernment {
 
-    public static String Nation = "/nationName";
-    public static String LAND = Nation + "/land";
-    public static String PEOPLE = Nation + "/people";
-    public static List<NationLand> landNodeCache = new ArrayList<>();
-    public static List<Human> humanNodeCache = new ArrayList<>();
-
     private ZKClient zkClient;
+
+    public Official official;
+
     public String name = this.getClass().getSimpleName();
 
     public StateGovernment(ZKClient zkClient) {
@@ -34,33 +24,22 @@ public class StateGovernment {
                 .connectionTimeout(Integer.MAX_VALUE)
                 .build();
         this.zkClient = zkClient;
-        buildNation();
+
+        official = new Official(zkClient);
+
+        buildNation(zkClient);
+
+        instance = this;
     }
 
-    private void buildNation() {
+    public void buildNation(ZKClient zkClient) {
 
-        lookupNationLand();
+        official.lookupNationLand();
 
-        lookupPopulation();
-        
-    }
-
-    private void lookupPopulation() {
-        boolean populationExist = this.zkClient.exists(PEOPLE);
-        StaticLog.info("[lookupPopulation] exist:" + populationExist);
-        if (!populationExist) {
-            this.zkClient.createRecursive(PEOPLE, name, CreateMode.PERSISTENT);
-        }
-        this.zkClient.listenChildDataChanges(PEOPLE, new PopulationChangeEvent());
+        official.lookupPopulation();
 
     }
 
-    private void lookupNationLand() {
-        boolean landExist = this.zkClient.exists(LAND);
-        StaticLog.info("[lookupNationLand] exist:" + landExist);
-        if (!landExist) {
-            this.zkClient.createRecursive(LAND, name, CreateMode.PERSISTENT);
-        }
-        this.zkClient.listenChildDataChanges(LAND, new NationLandChangeEvent());
-    }
+    public static StateGovernment instance;
+
 }
