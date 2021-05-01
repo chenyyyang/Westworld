@@ -1,6 +1,7 @@
 package real.world.government;
 
 import cn.hutool.log.StaticLog;
+import lombok.Data;
 import org.apache.zookeeper.CreateMode;
 import real.world.land.NationLand;
 import real.world.people.Human;
@@ -9,6 +10,7 @@ import real.world.tools.zkClient.ZKClient;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 public class Official {
 
     public static String Nation = "/nationName";

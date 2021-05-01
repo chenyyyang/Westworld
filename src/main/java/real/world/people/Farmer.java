@@ -1,10 +1,14 @@
 package real.world.people;
 
+import lombok.Data;
 import real.world.land.Farmland;
 
 import java.util.concurrent.TimeUnit;
 
+@Data
 public class Farmer implements Human {
+
+    String farmerName;
 
     Farmland farmland;
 
@@ -24,7 +28,7 @@ public class Farmer implements Human {
             } catch (InterruptedException e) {
                 break;
             }
-            
+
         }
 
         afterWork();

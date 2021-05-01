@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.sql.DataSource;
 
+@Data
 public class Farmland implements NationLand {
 
     String type = "Mysql-database";
@@ -12,18 +13,17 @@ public class Farmland implements NationLand {
     DataSource dataSource;
 
     public Farmland(FarmlandInfo info) {
-
         SimpleDataSource simpleDataSource = new SimpleDataSource();
-        simpleDataSource.init(info.url, info.username, info.password);
+        simpleDataSource.init(info.getUrl(), info.getUsername(), info.getPassword());
         dataSource = simpleDataSource;
     }
 
     /*保存一些元数据到zk*/
     @Data
     public class FarmlandInfo {
-        String farmlandName = "laoxiangji_park";
-        String url = "jdbc:mysql://localhost:3306/westworld";
-        String username = "root";
-        String password = "12345678";
+        private String farmlandName = "laoxiangji_park";
+        private String url = "jdbc:mysql://localhost:3306/westworld";
+        private String username = "root";
+        private String password = "12345678";
     }
 }
