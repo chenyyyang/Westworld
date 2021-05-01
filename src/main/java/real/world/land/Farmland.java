@@ -1,6 +1,7 @@
 package real.world.land;
 
 import cn.hutool.db.ds.simple.SimpleDataSource;
+import lombok.Data;
 
 import javax.sql.DataSource;
 
@@ -18,6 +19,7 @@ public class Farmland implements NationLand {
     }
 
     /*保存一些元数据到zk*/
+    @Data
     public class FarmlandInfo {
         String farmlandName = "laoxiangji_park";
         String url = "jdbc:mysql://localhost:3306/westworld";
