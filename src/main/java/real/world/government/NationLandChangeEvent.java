@@ -6,10 +6,17 @@ import real.world.tools.zkClient.listener.ZKChildDataListener;
 import java.util.List;
 
 public class NationLandChangeEvent extends ZKChildDataListener {
+
+    private Official official;
+
+    public NationLandChangeEvent(Official official) {
+        this.official = official;
+    }
+
     //会话过期
     @Override
     public void handleSessionExpired(String path, Object data) throws Exception {
-        StaticLog.error("[NationLandChangeEvent]" + path + "  lost connection:" + data);
+        StaticLog.debug("[NationLandChangeEvent]" + path + "  lost connection:" + data);
     }
 
     //子节点数据发生改变
@@ -22,5 +29,12 @@ public class NationLandChangeEvent extends ZKChildDataListener {
     @Override
     public void handleChildCountChanged(String path, List<String> children) throws Exception {
         StaticLog.error("[NationLandChangeEvent]:" + path + "  land rise wide now:" + children);
+        List<String> people = official.listPeople();
+        if (people.size() < children.size()) {
+            StaticLog.error("[NationLandChangeEvent]: no people to assign land ");
+            return;
+        }
+
+        official.reassigning();
     }
 }
