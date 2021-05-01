@@ -18,7 +18,7 @@ public class Official {
     public static List<NationLand> landNodeCache = new ArrayList<>();
     public static List<Human> humanNodeCache = new ArrayList<>();
 
-    public String name = "Official.Zhangs";
+    public String name = "Robert";
 
     private ZKClient zkClient;
 

@@ -6,7 +6,7 @@ public class StateGovernmentTest {
 
     public static void main(String[] args) throws InterruptedException {
 
-        StateGovernment government = new StateGovernment();
+        StateGovernment government = StateGovernment.get();
 
         new CountDownLatch(1).await();
     }

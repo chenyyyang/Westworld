@@ -5,15 +5,10 @@ import real.world.tools.zkClient.ZKClientBuilder;
 
 public class StateGovernment {
 
-    private ZKClient zkClient;
-
     public Official official;
 
     public String name = this.getClass().getSimpleName();
 
-    public StateGovernment(ZKClient zkClient) {
-        this.zkClient = zkClient;
-    }
 
     public StateGovernment() {
         String address = "localhost:2181";
@@ -23,13 +18,11 @@ public class StateGovernment {
                 .retryTimeout(1000 * 60)
                 .connectionTimeout(Integer.MAX_VALUE)
                 .build();
-        this.zkClient = zkClient;
 
         official = new Official(zkClient);
 
         buildNation(zkClient);
 
-        instance = this;
     }
 
     public void buildNation(ZKClient zkClient) {
@@ -40,6 +33,12 @@ public class StateGovernment {
 
     }
 
-    public static StateGovernment instance;
+    public static volatile StateGovernment instance;
 
+    public synchronized static StateGovernment get() {
+        if (instance == null) {
+            instance = new StateGovernment();
+        }
+        return instance;
+    }
 }
