@@ -21,7 +21,7 @@ public class Westworld {
         government.getVillageOfficial().registeFarmland(info);
         //5.自动开始rebalance，启动Farmer去干活了。。。
 
-        //6.运行时创建第二个农场
+        //6.测试运行时创建第二个农场
         Farmland.FarmlandInfo farmlandInfo = new Farmland.FarmlandInfo();
         farmlandInfo.setUrl("jdbc:mysql://localhost:3306/newland");
         farmlandInfo.setFarmlandName("feidong_laomuji");
