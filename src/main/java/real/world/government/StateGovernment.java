@@ -14,7 +14,7 @@ public class StateGovernment {
     public StateGovernment() {
         String address = "localhost:2181";
         ZKClient zkClient = ZKClientBuilder.newZKClient(address)
-                .sessionTimeout(10000)
+                .sessionTimeout(30000)
                 .eventThreadPoolSize(1)
                 .retryTimeout(1000 * 60)
                 .connectionTimeout(Integer.MAX_VALUE)
@@ -23,7 +23,6 @@ public class StateGovernment {
 
         villageOfficial = new VillageOfficial(zkClient);
 
-        //设置监听
         buildNation();
 
     }
