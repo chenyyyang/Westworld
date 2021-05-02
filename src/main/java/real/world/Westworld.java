@@ -12,6 +12,12 @@ public class Westworld {
         new CountDownLatch(1).await();
     }
 
+    /*
+     * 这个用例是再啥也没有的情况下，创建Farmland
+     * 与在运行过程中，创建Farmland。
+     * 触发rebalance的情况
+     * 实际上第二个Farmland触发的rebalance离第一次触发时间间隔较短，会被reject掉。。
+     * */
     public static void case1() {
         //1。拿到农场的配置，这里使用默认配置
         Farmland.FarmlandInfo info = new Farmland.FarmlandInfo();
