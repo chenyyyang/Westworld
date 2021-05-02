@@ -11,6 +11,7 @@ import real.world.people.Farmer;
 import real.world.tools.CasUtil;
 import real.world.tools.zkClient.ZKClient;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -94,6 +95,7 @@ public class VillageOfficial {
             StaticLog.error("[global rebalance] begin");
             List<String> nationLands = listNationLand();
             List<String> villageOfficial = listVillageOfficial();
+            Collections.sort(villageOfficial);
 
             int villageOfficialCount = villageOfficial.size();
             int selfIndex = villageOfficial.indexOf(this.name);
@@ -102,7 +104,7 @@ public class VillageOfficial {
                 int hashValue = nationLand.hashCode() % villageOfficialCount;
 
                 if (hashValue == selfIndex) {
-                    StaticLog.error(" {} hashValue[{}] selfIndex[{}] ->hireFarmerForLand", nationLand, hashValue, selfIndex);
+                    StaticLog.error(" {} hashValue[{}] self[{}]Index[{}] ->hireFarmerForLand", nationLand, hashValue, this.name, selfIndex);
                     Farmer farmer = hireFarmerForLand(nationLand);
                     farmer.start();
                     localFarmer.put(nationLand, farmer);
