@@ -15,20 +15,27 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Data
-public class Official {
-
+public class VillageOfficial {
     public static String Nation = "/nationName";
+
     public static String LAND = Nation + "/land";
-    public static String PEOPLE = Nation + "/people";
+    public static String PEOPLE = Nation + "/official";
 
     public static Map<String, Farmer> localPeople = new ConcurrentHashMap<>();
 
-    public String name = "Robert";
+    public String name;
 
     private ZKClient zkClient;
 
-    public Official(ZKClient zkClient) {
+    public VillageOfficial(ZKClient zkClient) {
+        String localhostStr = NetUtil.getLocalhostStr() + "_" + NetUtil.getUsableLocalPort();
         this.zkClient = zkClient;
+        name = "official" + localhostStr;
+        //注册临时节点
+        this.zkClient.createRecursive(PEOPLE + "/" + name,
+                localhostStr,
+                CreateMode.EPHEMERAL);
+
     }
 
     public void lookupPopulation() {
@@ -50,7 +57,7 @@ public class Official {
         this.zkClient.listenChildDataChanges(LAND, new NationLandChangeEvent(this));
     }
 
-    public void registeFarmland(Farmland.FarmlandInfo farmlandInfo) {
+    public Boolean registeFarmland(Farmland.FarmlandInfo farmlandInfo) {
 
         String farmlandName = farmlandInfo.getFarmlandName();
 
@@ -59,11 +66,12 @@ public class Official {
         StaticLog.info("[registeFarmland] " + farmlandName + " exist:" + landExist);
 
         if (!landExist) {
-
             this.zkClient.createRecursive(LAND + "/" + farmlandName,
                     JSONUtil.toJsonStr(farmlandInfo),
                     CreateMode.PERSISTENT);
+            return true;
         }
+        return false;
     }
 
    /* private volatile int value;
@@ -117,14 +125,6 @@ public class Official {
 
     }
 
-    public void registeFarmer(Farmer farmer) {
-        //注册顺序节点
-        this.zkClient.createRecursive(PEOPLE + "/" + farmer.getFarmerName(),
-                "" + NetUtil.getLocalhostStr(),
-                CreateMode.EPHEMERAL);
-        localPeople.put(farmer.getFarmerName(), farmer);
-
-    }
 
     public List<String> listPeople() {
         return zkClient.getChildren(PEOPLE, false);

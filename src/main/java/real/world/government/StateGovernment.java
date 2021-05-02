@@ -7,7 +7,7 @@ import real.world.tools.zkClient.ZKClientBuilder;
 @Data
 public class StateGovernment {
 
-    public Official official;
+    public VillageOfficial villageOfficial;
 
     public String name = this.getClass().getSimpleName();
 
@@ -20,17 +20,18 @@ public class StateGovernment {
                 .connectionTimeout(Integer.MAX_VALUE)
                 .build();
 
-        official = new Official(zkClient);
+        villageOfficial = new VillageOfficial(zkClient);
 
+        //设置监听
         buildNation(zkClient);
 
     }
 
     public void buildNation(ZKClient zkClient) {
-        //这里本可以合并成一个方法，通过不同的参数来lookup，但是为了单一
-        official.lookupNationLand();
+        //这里本可以合并成一个方法，通过不同的参数来lookup，但是为了单一职责还是分开
+        villageOfficial.lookupNationLand();
 
-        official.lookupPopulation();
+        villageOfficial.lookupPopulation();
 
     }
 

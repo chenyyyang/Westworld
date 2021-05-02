@@ -7,10 +7,10 @@ import java.util.List;
 
 public class NationLandChangeEvent extends ZKChildDataListener {
 
-    private Official official;
+    private VillageOfficial villageOfficial;
 
-    public NationLandChangeEvent(Official official) {
-        this.official = official;
+    public NationLandChangeEvent(VillageOfficial villageOfficial) {
+        this.villageOfficial = villageOfficial;
     }
 
     //会话过期
@@ -29,12 +29,12 @@ public class NationLandChangeEvent extends ZKChildDataListener {
     @Override
     public void handleChildCountChanged(String path, List<String> children) throws Exception {
         StaticLog.error("[NationLandChangeEvent]:" + path + "  land rise wide now:" + children);
-        List<String> people = official.listPeople();
+        List<String> people = villageOfficial.listPeople();
         if (people.size() < children.size()) {
             StaticLog.error("[NationLandChangeEvent]: no people to assign land ");
             return;
         }
 
-        official.reassigning();
+        villageOfficial.reassigning();
     }
 }

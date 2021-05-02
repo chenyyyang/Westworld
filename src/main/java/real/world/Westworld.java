@@ -1,9 +1,7 @@
 package real.world;
 
-import cn.hutool.core.util.RandomUtil;
 import real.world.government.StateGovernment;
 import real.world.land.Farmland;
-import real.world.people.Farmer;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -22,10 +20,14 @@ public class Westworld {
         //3.创建政府，开始监听和管理
         StateGovernment government = StateGovernment.get();
         //4.登记农场,触发rebalance，但是啥也做不了
-        government.getOfficial().registeFarmland(info);
-        //5.初始化一个农民
-        Farmer farmer = new Farmer("Farmer_" + RandomUtil.randomLong());
-        government.getOfficial().registeFarmer(farmer);
+        government.getVillageOfficial().registeFarmland(info);
+        //5.自动开始rebalance，启动Farmer去干活了。。。
+
+        //6.运行时创建第二个农场
+        Farmland.FarmlandInfo farmlandInfo = new Farmland.FarmlandInfo();
+        farmlandInfo.setUrl("");
+        farmlandInfo.setFarmlandName("");
+        government.getVillageOfficial().registeFarmland(farmlandInfo);
 
     }
 }
