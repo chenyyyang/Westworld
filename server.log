@@ -2203,4 +2203,106 @@
   2021-05-02 23:35:43 INFO  Farmer:26 - Farmer [workFor_feidong_laomuji] start success~gogogo
   2021-05-02 23:35:44 ERROR Farmer:37 - Farmer [workFor_laoxiangji_park] workLoop[0] Cost 1003 ms 
   2021-05-02 23:35:44 ERROR Farmer:37 - Farmer [workFor_feidong_laomuji] workLoop[0] Cost 1004 ms 
+  2021-05-02 23:50:18 ERROR NationLandChangeEvent:24 - [NationLandChangeEvent]:/nationName/land  land rise wide now:[]
+  2021-05-02 23:50:18 ERROR NationLandChangeEvent:24 - [NationLandChangeEvent]:/nationName/land  land rise wide now:null
+  2021-05-02 23:50:44 INFO  ZKClient:214 - The ZKClient is starting....
+  2021-05-02 23:50:44 INFO  ZKConnectionImpl:104 - connecting to server [localhost:2181]
+  2021-05-02 23:50:45 INFO  ZooKeeper:100 - Client environment:zookeeper.version=3.4.8--1, built on 02/06/2016 03:18 GMT
+  2021-05-02 23:50:45 INFO  ZooKeeper:100 - Client environment:host.name=localhost
+  2021-05-02 23:50:45 INFO  ZooKeeper:100 - Client environment:java.version=1.8.0_231
+  2021-05-02 23:50:45 INFO  ZooKeeper:100 - Client environment:java.vendor=Oracle Corporation
+  2021-05-02 23:50:45 INFO  ZooKeeper:100 - Client environment:java.home=/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre
+  2021-05-02 23:50:45 INFO  ZooKeeper:100 - Client environment:java.class.path=/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/deploy.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/ext/cldrdata.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/ext/dnsns.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/ext/jaccess.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/ext/jfxrt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/ext/localedata.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/ext/nashorn.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/ext/sunec.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/ext/sunjce_provider.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/ext/sunpkcs11.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/ext/zipfs.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/javaws.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/jfxswt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/management-agent.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/plugin.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/lib/ant-javafx.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/lib/dt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/lib/javafx-mx.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/lib/jconsole.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/lib/packager.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/lib/sa-jdi.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/lib/tools.jar:/Users/chen/Documents/xiaomiProjects/Westworld/target/classes:/Users/chen/.m2/repository/org/apache/zookeeper/zookeeper/3.4.8/zookeeper-3.4.8.jar:/Users/chen/.m2/repository/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1.jar:/Users/chen/.m2/repository/org/slf4j/slf4j-log4j12/1.6.1/slf4j-log4j12-1.6.1.jar:/Users/chen/.m2/repository/log4j/log4j/1.2.16/log4j-1.2.16.jar:/Users/chen/.m2/repository/jline/jline/0.9.94/jline-0.9.94.jar:/Users/chen/.m2/repository/io/netty/netty/3.7.0.Final/netty-3.7.0.Final.jar:/Users/chen/.m2/repository/cn/hutool/hutool-all/5.6.3/hutool-all-5.6.3.jar:/Users/chen/.m2/repository/mysql/mysql-connector-java/5.1.32/mysql-connector-java-5.1.32.jar:/Users/chen/.m2/repository/org/projectlombok/lombok/1.16.20/lombok-1.16.20.jar:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar:/Users/chen/Library/Caches/JetBrains/IntelliJIdea2020.1/captureAgent/debugger-agent.jar
+  2021-05-02 23:50:45 INFO  ZooKeeper:100 - Client environment:java.library.path=/Users/chen/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+  2021-05-02 23:50:45 INFO  ZooKeeper:100 - Client environment:java.io.tmpdir=/var/folders/v3/3lt0pvrj429b3bh78mlrvsn40000gn/T/
+  2021-05-02 23:50:45 INFO  ZooKeeper:100 - Client environment:java.compiler=<NA>
+  2021-05-02 23:50:45 INFO  ZooKeeper:100 - Client environment:os.name=Mac OS X
+  2021-05-02 23:50:45 INFO  ZooKeeper:100 - Client environment:os.arch=x86_64
+  2021-05-02 23:50:45 INFO  ZooKeeper:100 - Client environment:os.version=10.16
+  2021-05-02 23:50:45 INFO  ZooKeeper:100 - Client environment:user.name=chen
+  2021-05-02 23:50:45 INFO  ZooKeeper:100 - Client environment:user.home=/Users/chen
+  2021-05-02 23:50:45 INFO  ZooKeeper:100 - Client environment:user.dir=/Users/chen/Documents/xiaomiProjects/Westworld
+  2021-05-02 23:50:45 INFO  ZooKeeper:438 - Initiating client connection, connectString=localhost:2181 sessionTimeout=30000 watcher=real.world.tools.zkClient.watcher.ZKWatcher@3159c4b8
+  2021-05-02 23:50:45 INFO  ZKConnectionImpl:106 - connected to server [localhost:2181]
+  2021-05-02 23:50:45 INFO  ZKConnectionImpl:208 - Waiting for ZooKeeper state SyncConnected
+  2021-05-02 23:50:45 INFO  ClientCnxn:1032 - Opening socket connection to server localhost/0:0:0:0:0:0:0:1:2181. Will not attempt to authenticate using SASL (unknown error)
+  2021-05-02 23:50:45 INFO  ClientCnxn:876 - Socket connection established to localhost/0:0:0:0:0:0:0:1:2181, initiating session
+  2021-05-02 23:50:45 INFO  ClientCnxn:1299 - Session establishment complete on server localhost/0:0:0:0:0:0:0:1:2181, sessionid = 0x1001bc9f2fe034b, negotiated timeout = 30000
+  2021-05-02 23:50:45 INFO  ZKWatcherProcess:62 - ZooKeeper state is changed [SyncConnected] .
+  2021-05-02 23:50:45 INFO  ZKConnectionImpl:222 - ZooKeeper State is SyncConnected
+  2021-05-02 23:50:45 INFO  ZKClient:224 - The ZkClient is started.
+  2021-05-02 23:50:45 INFO  VillageOfficial:58 - [lookupNationLand] exist:false
+  2021-05-02 23:50:46 ERROR NationLandChangeEvent:24 - [NationLandChangeEvent]:/nationName/land  land rise wide now:[]
+  2021-05-02 23:50:46 INFO  VillageOfficial:48 - [lookupPopulation] exist:false
+  2021-05-02 23:50:46 INFO  VillageOfficial:71 - [registeFarmland] laoxiangji_park exist:false
+  2021-05-02 23:50:47 ERROR OfficialChangeEvent:31 - [PopulationChangeEvent]:/nationName/official now population:[1]
+  2021-05-02 23:50:47 ERROR VillageOfficial:84 - [global rebalance] start waiting
+  2021-05-02 23:50:47 ERROR NationLandChangeEvent:24 - [NationLandChangeEvent]:/nationName/land  land rise wide now:[laoxiangji_park]
+  2021-05-02 23:50:50 INFO  VillageOfficial:71 - [registeFarmland] feidong_laomuji exist:false
+  2021-05-02 23:50:50 ERROR NationLandChangeEvent:31 - [NationLandChangeEvent]:/nationName/land  land rise wide now:[laoxiangji_park]
+  2021-05-02 23:50:50 ERROR VillageOfficial:84 - [global rebalance] start waiting
+  2021-05-02 23:50:50 ERROR NationLandChangeEvent:24 - [NationLandChangeEvent]:/nationName/land  land rise wide now:[laoxiangji_park, feidong_laomuji]
+  2021-05-02 23:50:50 ERROR VillageOfficial:86 - [global rebalance] reject 
+  2021-05-02 23:50:50 ERROR NationLandChangeEvent:31 - [NationLandChangeEvent]:/nationName/land  land rise wide now:[laoxiangji_park, feidong_laomuji]
+  2021-05-02 23:50:50 ERROR VillageOfficial:84 - [global rebalance] start waiting
+  2021-05-02 23:50:50 ERROR VillageOfficial:86 - [global rebalance] reject 
+  2021-05-02 23:51:19 ERROR NationLandChangeEvent:24 - [NationLandChangeEvent]:/nationName/land  land rise wide now:[feidong_laomuji]
+  2021-05-02 23:51:19 ERROR NationLandChangeEvent:24 - [NationLandChangeEvent]:/nationName/land  land rise wide now:null
+  2021-05-02 23:51:19 ERROR NationLandChangeEvent:24 - [NationLandChangeEvent]:/nationName/land  land rise wide now:null
+  2021-05-02 23:51:38 INFO  ZKClient:214 - The ZKClient is starting....
+  2021-05-02 23:51:38 INFO  ZKConnectionImpl:104 - connecting to server [localhost:2181]
+  2021-05-02 23:51:38 INFO  ZooKeeper:100 - Client environment:zookeeper.version=3.4.8--1, built on 02/06/2016 03:18 GMT
+  2021-05-02 23:51:38 INFO  ZooKeeper:100 - Client environment:host.name=localhost
+  2021-05-02 23:51:38 INFO  ZooKeeper:100 - Client environment:java.version=1.8.0_231
+  2021-05-02 23:51:38 INFO  ZooKeeper:100 - Client environment:java.vendor=Oracle Corporation
+  2021-05-02 23:51:38 INFO  ZooKeeper:100 - Client environment:java.home=/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre
+  2021-05-02 23:51:38 INFO  ZooKeeper:100 - Client environment:java.class.path=/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/deploy.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/ext/cldrdata.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/ext/dnsns.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/ext/jaccess.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/ext/jfxrt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/ext/localedata.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/ext/nashorn.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/ext/sunec.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/ext/sunjce_provider.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/ext/sunpkcs11.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/ext/zipfs.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/javaws.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/jfxswt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/management-agent.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/plugin.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/lib/ant-javafx.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/lib/dt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/lib/javafx-mx.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/lib/jconsole.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/lib/packager.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/lib/sa-jdi.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/lib/tools.jar:/Users/chen/Documents/xiaomiProjects/Westworld/target/classes:/Users/chen/.m2/repository/org/apache/zookeeper/zookeeper/3.4.8/zookeeper-3.4.8.jar:/Users/chen/.m2/repository/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1.jar:/Users/chen/.m2/repository/org/slf4j/slf4j-log4j12/1.6.1/slf4j-log4j12-1.6.1.jar:/Users/chen/.m2/repository/log4j/log4j/1.2.16/log4j-1.2.16.jar:/Users/chen/.m2/repository/jline/jline/0.9.94/jline-0.9.94.jar:/Users/chen/.m2/repository/io/netty/netty/3.7.0.Final/netty-3.7.0.Final.jar:/Users/chen/.m2/repository/cn/hutool/hutool-all/5.6.3/hutool-all-5.6.3.jar:/Users/chen/.m2/repository/mysql/mysql-connector-java/5.1.32/mysql-connector-java-5.1.32.jar:/Users/chen/.m2/repository/org/projectlombok/lombok/1.16.20/lombok-1.16.20.jar:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar:/Users/chen/Library/Caches/JetBrains/IntelliJIdea2020.1/captureAgent/debugger-agent.jar
+  2021-05-02 23:51:38 INFO  ZooKeeper:100 - Client environment:java.library.path=/Users/chen/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+  2021-05-02 23:51:38 INFO  ZooKeeper:100 - Client environment:java.io.tmpdir=/var/folders/v3/3lt0pvrj429b3bh78mlrvsn40000gn/T/
+  2021-05-02 23:51:38 INFO  ZooKeeper:100 - Client environment:java.compiler=<NA>
+  2021-05-02 23:51:38 INFO  ZooKeeper:100 - Client environment:os.name=Mac OS X
+  2021-05-02 23:51:38 INFO  ZooKeeper:100 - Client environment:os.arch=x86_64
+  2021-05-02 23:51:38 INFO  ZooKeeper:100 - Client environment:os.version=10.16
+  2021-05-02 23:51:38 INFO  ZooKeeper:100 - Client environment:user.name=chen
+  2021-05-02 23:51:38 INFO  ZooKeeper:100 - Client environment:user.home=/Users/chen
+  2021-05-02 23:51:38 INFO  ZooKeeper:100 - Client environment:user.dir=/Users/chen/Documents/xiaomiProjects/Westworld
+  2021-05-02 23:51:38 INFO  ZooKeeper:438 - Initiating client connection, connectString=localhost:2181 sessionTimeout=30000 watcher=real.world.tools.zkClient.watcher.ZKWatcher@3159c4b8
+  2021-05-02 23:51:38 INFO  ZKConnectionImpl:106 - connected to server [localhost:2181]
+  2021-05-02 23:51:38 INFO  ZKConnectionImpl:208 - Waiting for ZooKeeper state SyncConnected
+  2021-05-02 23:51:38 INFO  ClientCnxn:1032 - Opening socket connection to server localhost/0:0:0:0:0:0:0:1:2181. Will not attempt to authenticate using SASL (unknown error)
+  2021-05-02 23:51:39 INFO  ClientCnxn:876 - Socket connection established to localhost/0:0:0:0:0:0:0:1:2181, initiating session
+  2021-05-02 23:51:39 INFO  ClientCnxn:1299 - Session establishment complete on server localhost/0:0:0:0:0:0:0:1:2181, sessionid = 0x1001bc9f2fe034d, negotiated timeout = 30000
+  2021-05-02 23:51:39 INFO  ZKWatcherProcess:62 - ZooKeeper state is changed [SyncConnected] .
+  2021-05-02 23:51:39 INFO  ZKConnectionImpl:222 - ZooKeeper State is SyncConnected
+  2021-05-02 23:51:39 INFO  ZKClient:224 - The ZkClient is started.
+  2021-05-02 23:51:39 INFO  VillageOfficial:58 - [lookupNationLand] exist:false
+  2021-05-02 23:51:39 ERROR NationLandChangeEvent:24 - [NationLandChangeEvent]:/nationName/land  land rise wide now:[]
+  2021-05-02 23:51:39 INFO  VillageOfficial:48 - [lookupPopulation] exist:false
+  2021-05-02 23:52:16 INFO  VillageOfficial:71 - [registeFarmland] laoxiangji_park exist:false
+  2021-05-02 23:52:16 ERROR OfficialChangeEvent:31 - [PopulationChangeEvent]:/nationName/official now population:[10000000000]
+  2021-05-02 23:52:16 ERROR VillageOfficial:84 - [global rebalance] start waiting
+  2021-05-02 23:52:20 ERROR NationLandChangeEvent:24 - [NationLandChangeEvent]:/nationName/land  land rise wide now:[laoxiangji_park]
+  2021-05-02 23:52:20 INFO  VillageOfficial:71 - [registeFarmland] feidong_laomuji exist:false
+  2021-05-02 23:52:20 ERROR NationLandChangeEvent:31 - [NationLandChangeEvent]:/nationName/land  land rise wide now:[laoxiangji_park]
+  2021-05-02 23:52:20 ERROR NationLandChangeEvent:24 - [NationLandChangeEvent]:/nationName/land  land rise wide now:[laoxiangji_park, feidong_laomuji]
+  2021-05-02 23:52:20 ERROR VillageOfficial:84 - [global rebalance] start waiting
+  2021-05-02 23:52:22 ERROR VillageOfficial:86 - [global rebalance] reject 
+  2021-05-02 23:52:22 ERROR NationLandChangeEvent:31 - [NationLandChangeEvent]:/nationName/land  land rise wide now:[laoxiangji_park, feidong_laomuji]
+  2021-05-02 23:52:22 ERROR VillageOfficial:84 - [global rebalance] start waiting
+  2021-05-02 23:52:23 ERROR VillageOfficial:86 - [global rebalance] reject 
+  2021-05-02 23:52:25 ERROR VillageOfficial:94 - [global rebalance] begin
+  2021-05-02 23:52:25 ERROR VillageOfficial:105 -  laoxiangji_park hashValue[0] selfIndex[0] ->hireFarmerForLand
+  2021-05-02 23:52:25 ERROR VillageOfficial:105 -  feidong_laomuji hashValue[0] selfIndex[0] ->hireFarmerForLand
+  2021-05-02 23:52:25 INFO  Farmer:26 - Farmer [workFor_laoxiangji_park] start success~gogogo
+  2021-05-02 23:52:25 INFO  Farmer:26 - Farmer [workFor_feidong_laomuji] start success~gogogo
+  2021-05-02 23:52:26 ERROR Farmer:37 - Farmer [workFor_laoxiangji_park] workLoop[0] Cost 1003 ms 
+  2021-05-02 23:52:26 ERROR Farmer:37 - Farmer [workFor_feidong_laomuji] workLoop[0] Cost 1002 ms 
+  2021-05-02 23:52:36 ERROR Farmer:37 - Farmer [workFor_laoxiangji_park] workLoop[1] Cost 1002 ms 
+  2021-05-02 23:52:36 ERROR Farmer:37 - Farmer [workFor_feidong_laomuji] workLoop[1] Cost 1002 ms 
+  2021-05-02 23:52:46 ERROR Farmer:37 - Farmer [workFor_laoxiangji_park] workLoop[2] Cost 1004 ms 
+  2021-05-02 23:52:46 ERROR Farmer:37 - Farmer [workFor_feidong_laomuji] workLoop[2] Cost 1004 ms 
+  2021-05-02 23:52:56 ERROR Farmer:37 - Farmer [workFor_feidong_laomuji] workLoop[3] Cost 1002 ms 
+  2021-05-02 23:52:56 ERROR Farmer:37 - Farmer [workFor_laoxiangji_park] workLoop[3] Cost 1003 ms 
+  2021-05-02 23:53:06 ERROR Farmer:37 - Farmer [workFor_laoxiangji_park] workLoop[4] Cost 1003 ms 
+  2021-05-02 23:53:06 ERROR Farmer:37 - Farmer [workFor_feidong_laomuji] workLoop[4] Cost 1003 ms 
   

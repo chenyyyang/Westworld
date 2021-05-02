@@ -11,7 +11,6 @@ import real.world.people.Farmer;
 import real.world.tools.CasUtil;
 import real.world.tools.zkClient.ZKClient;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -36,10 +35,11 @@ public class VillageOfficial {
 
     public void registeSelf() {
         String localhostStr = NetUtil.getLocalhostStr() + "_" + NetUtil.getUsableLocalPort();
-        name = "official" + localhostStr;
         //注册临时节点
-        this.zkClient.createEphemerale(OFFICIAL + "/" + name,
-                localhostStr, false);
+        String newPath = this.zkClient.createEphemerale(OFFICIAL + "/1",
+                localhostStr, true);
+        String[] paths = newPath.split("/");
+        name = paths[paths.length - 1];
 
     }
 
@@ -93,10 +93,7 @@ public class VillageOfficial {
 
             StaticLog.error("[global rebalance] begin");
             List<String> nationLands = listNationLand();
-
-            //对机器排序
             List<String> villageOfficial = listVillageOfficial();
-            Collections.sort(villageOfficial);
 
             int villageOfficialCount = villageOfficial.size();
             int selfIndex = villageOfficial.indexOf(this.name);
