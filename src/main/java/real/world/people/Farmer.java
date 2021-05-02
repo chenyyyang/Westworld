@@ -17,25 +17,42 @@ public class Farmer extends Thread {
     Farmland farmland;
 
     public Farmer(String name) {
-        super("t-" + name);
-        farmerName = name;
+        super("t_workFor_" + name);
+        farmerName = "workFor_" + name;
     }
 
     @Override
     public void run() {
+        StaticLog.info("Farmer [{}] start success~gogogo", farmerName);
+        for (int i = 0; ; i++) {
+            if (isInterrupted()) {
+                StaticLog.error("Farmer [{}] Interrupted", farmerName);
+                break;
+            }
+            long beginTime = System.currentTimeMillis();
 
-        while (true) {
+            doWork();
 
+            long costTime = System.currentTimeMillis() - beginTime;
+            StaticLog.error("Farmer [{}] workLoop[{}] Cost {} ms ", farmerName, i, costTime);
             try {
-                TimeUnit.SECONDS.sleep(3600);
+                TimeUnit.MILLISECONDS.sleep(10 * 1000 - costTime);
             } catch (InterruptedException e) {
                 StaticLog.error("Farmer [{}] Interrupted", farmerName);
                 break;
             }
-
         }
 
         afterWork();
+
+    }
+
+    private void doWork() {
+        try {
+            TimeUnit.MILLISECONDS.sleep(1000);
+
+        } catch (Throwable throwable) {
+        }
 
     }
 

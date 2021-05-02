@@ -29,12 +29,10 @@ public class NationLandChangeEvent extends ZKChildDataListener {
     @Override
     public void handleChildCountChanged(String path, List<String> children) throws Exception {
         StaticLog.error("[NationLandChangeEvent]:" + path + "  land rise wide now:" + children);
-        List<String> people = villageOfficial.listPeople();
-        if (people.size() < children.size()) {
-            StaticLog.error("[NationLandChangeEvent]: no people to assign land ");
+        List<String> villageOfficial = this.villageOfficial.listVillageOfficial();
+        if (villageOfficial.size() == 0) {
             return;
         }
-
-        villageOfficial.reassigning();
+        this.villageOfficial.reassigning();
     }
 }

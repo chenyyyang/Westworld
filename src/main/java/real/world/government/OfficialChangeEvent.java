@@ -5,11 +5,11 @@ import real.world.tools.zkClient.listener.ZKChildDataListener;
 
 import java.util.List;
 
-public class PopulationChangeEvent extends ZKChildDataListener {
+public class OfficialChangeEvent extends ZKChildDataListener {
 
     private VillageOfficial villageOfficial;
 
-    public PopulationChangeEvent(VillageOfficial villageOfficial) {
+    public OfficialChangeEvent(VillageOfficial villageOfficial) {
         this.villageOfficial = villageOfficial;
     }
 
@@ -29,11 +29,6 @@ public class PopulationChangeEvent extends ZKChildDataListener {
     @Override
     public void handleChildCountChanged(String path, List<String> children) throws Exception {
         StaticLog.error("[PopulationChangeEvent]:" + path + " now population:" + children);
-        List<String> nationLand = villageOfficial.listNationLand();
-        if (nationLand.size() < 1) {
-            StaticLog.error("[PopulationChangeEvent]: no land to assign  ");
-            return;
-        }
         villageOfficial.reassigning();
     }
 }

@@ -18,21 +18,21 @@ public class StateGovernment {
                 .eventThreadPoolSize(1)
                 .retryTimeout(1000 * 60)
                 .connectionTimeout(Integer.MAX_VALUE)
+                .eventThreadPoolSize(10)//处理事件的线程数，可选，默认值为1
                 .build();
 
         villageOfficial = new VillageOfficial(zkClient);
 
         //设置监听
-        buildNation(zkClient);
+        buildNation();
 
     }
 
-    public void buildNation(ZKClient zkClient) {
+    public void buildNation() {
         //这里本可以合并成一个方法，通过不同的参数来lookup，但是为了单一职责还是分开
         villageOfficial.lookupNationLand();
-
         villageOfficial.lookupPopulation();
-
+        villageOfficial.registeSelf();
     }
 
     public static volatile StateGovernment instance;

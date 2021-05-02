@@ -9,42 +9,48 @@ import org.apache.zookeeper.CreateMode;
 import real.world.land.Farmland;
 import real.world.people.Farmer;
 import real.world.tools.zkClient.ZKClient;
+import sun.misc.Unsafe;
 
+import java.lang.reflect.Field;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 @Data
 public class VillageOfficial {
     public static String Nation = "/nationName";
 
     public static String LAND = Nation + "/land";
-    public static String PEOPLE = Nation + "/official";
+    public static String OFFICIAL = Nation + "/official";
 
-    public static Map<String, Farmer> localPeople = new ConcurrentHashMap<>();
+    public static Map<String, Farmer> localFarmer = new ConcurrentHashMap<>();
 
     public String name;
 
     private ZKClient zkClient;
 
     public VillageOfficial(ZKClient zkClient) {
-        String localhostStr = NetUtil.getLocalhostStr() + "_" + NetUtil.getUsableLocalPort();
         this.zkClient = zkClient;
+    }
+
+    public void registeSelf() {
+        String localhostStr = NetUtil.getLocalhostStr() + "_" + NetUtil.getUsableLocalPort();
         name = "official" + localhostStr;
         //注册临时节点
-        this.zkClient.createRecursive(PEOPLE + "/" + name,
-                localhostStr,
-                CreateMode.EPHEMERAL);
+        this.zkClient.createEphemerale(OFFICIAL + "/" + name,
+                localhostStr, false);
 
     }
 
     public void lookupPopulation() {
-        boolean populationExist = this.zkClient.exists(PEOPLE);
+        boolean populationExist = this.zkClient.exists(OFFICIAL);
         StaticLog.info("[lookupPopulation] exist:" + populationExist);
         if (!populationExist) {
-            this.zkClient.createRecursive(PEOPLE, name, CreateMode.PERSISTENT);
+            this.zkClient.createRecursive(OFFICIAL, name, CreateMode.PERSISTENT);
         }
-        this.zkClient.listenChildDataChanges(PEOPLE, new PopulationChangeEvent(this));
+        this.zkClient.listenChildDataChanges(OFFICIAL, new OfficialChangeEvent(this));
 
     }
 
@@ -74,60 +80,74 @@ public class VillageOfficial {
         return false;
     }
 
-   /* private volatile int value;
+    private volatile int value;
 
-    private static final Unsafe unsafe = Unsafe.getUnsafe();
+    private static final Unsafe unsafe;
     private static final long valueOffset;
 
     static {
         try {
+            Field field = Unsafe.class.getDeclaredField("theUnsafe");
+            field.setAccessible(true);
+            unsafe = (Unsafe) field.get(null);
             valueOffset = unsafe.objectFieldOffset
-                    (Official.class.getDeclaredField("value"));
+                    (VillageOfficial.class.getDeclaredField("value"));
         } catch (Exception ex) {
             throw new Error(ex);
         }
-    }*/
+    }
 
     public void reassigning() {
+        StaticLog.error("[global rebalance] start waiting");
+        if (!unsafe.compareAndSwapInt(this, valueOffset, 0, 1)) {
+            StaticLog.error("[global rebalance] reject ");
+            return;
+        }
         try {
-            StaticLog.error("[global rebalance] start...");
 
+            //5s拒绝其他 rebalance请求。
+            TimeUnit.SECONDS.sleep(5);
+
+            StaticLog.error("[global rebalance] begin");
             List<String> nationLands = listNationLand();
-            List<String> people = listPeople();
 
-            if (people.size() < nationLands.size()) {
-                StaticLog.error("[underpopulation error]");
-            }
-            for (Map.Entry<String, Farmer> entry : localPeople.entrySet()) {
-                String farmerName = entry.getKey();
-                int index = people.indexOf(farmerName);
-                if (index > nationLands.size() - 1) {
-                    //现在没活可干了
-                    continue;
+            //对机器排序
+            List<String> villageOfficial = listVillageOfficial();
+            Collections.sort(villageOfficial);
+
+            int villageOfficialCount = villageOfficial.size();
+            int selfIndex = villageOfficial.indexOf(this.name);
+
+            for (String nationLand : nationLands) {
+                int hashValue = nationLand.hashCode() % villageOfficialCount;
+
+                if (hashValue == selfIndex) {
+                    StaticLog.error(" {} hashValue[{}] selfIndex[{}] ->hireFarmerForLand", nationLand, hashValue, selfIndex);
+                    Farmer farmer = hireFarmerForLand(nationLand);
+                    farmer.start();
+                    localFarmer.put(nationLand, farmer);
                 }
-
-                String nationLand = nationLands.get(index);
-                Object data = zkClient.getData(LAND + "/" + nationLand);
-
-                Farmland.FarmlandInfo info = JSONUtil.toBean(data.toString(), Farmland.FarmlandInfo.class);
-                Farmland farmland = new Farmland(info);
-
-                Farmer farmer = entry.getValue();
-                farmer.prepareWork(farmland);
-                farmer.start();
-                localPeople.put(farmerName, farmer);
             }
 
         } catch (Throwable e) {
-            StaticLog.error("[reassigning]error:", ExceptionUtil.stacktraceToString(e));
+            StaticLog.error("[reassigning]error:" + e.getCause().getMessage(), ExceptionUtil.stacktraceToString(e));
         } finally {
+            unsafe.compareAndSwapInt(this, valueOffset, 1, 0);
         }
 
     }
 
+    private Farmer hireFarmerForLand(String nationLand) {
+        Object data = zkClient.getData(LAND + "/" + nationLand);
+        Farmland.FarmlandInfo info = JSONUtil.toBean(data.toString(), Farmland.FarmlandInfo.class);
+        Farmland farmland = new Farmland(info);
+        Farmer farmer = new Farmer(nationLand);
+        farmer.prepareWork(farmland);
+        return farmer;
+    }
 
-    public List<String> listPeople() {
-        return zkClient.getChildren(PEOPLE, false);
+    public List<String> listVillageOfficial() {
+        return zkClient.getChildren(OFFICIAL, false);
     }
 
     public List<String> listNationLand() {
