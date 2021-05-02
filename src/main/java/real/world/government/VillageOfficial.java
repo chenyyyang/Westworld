@@ -8,10 +8,9 @@ import lombok.Data;
 import org.apache.zookeeper.CreateMode;
 import real.world.land.Farmland;
 import real.world.people.Farmer;
+import real.world.tools.CasUtil;
 import real.world.tools.zkClient.ZKClient;
-import sun.misc.Unsafe;
 
-import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -80,26 +79,10 @@ public class VillageOfficial {
         return false;
     }
 
-    private volatile int value;
-
-    private static final Unsafe unsafe;
-    private static final long valueOffset;
-
-    static {
-        try {
-            Field field = Unsafe.class.getDeclaredField("theUnsafe");
-            field.setAccessible(true);
-            unsafe = (Unsafe) field.get(null);
-            valueOffset = unsafe.objectFieldOffset
-                    (VillageOfficial.class.getDeclaredField("value"));
-        } catch (Exception ex) {
-            throw new Error(ex);
-        }
-    }
 
     public void reassigning() {
         StaticLog.error("[global rebalance] start waiting");
-        if (!unsafe.compareAndSwapInt(this, valueOffset, 0, 1)) {
+        if (!CasUtil.tryOnce()) {
             StaticLog.error("[global rebalance] reject ");
             return;
         }
@@ -132,7 +115,7 @@ public class VillageOfficial {
         } catch (Throwable e) {
             StaticLog.error("[reassigning]error:" + e.getCause().getMessage(), ExceptionUtil.stacktraceToString(e));
         } finally {
-            unsafe.compareAndSwapInt(this, valueOffset, 1, 0);
+            CasUtil.reset();
         }
 
     }
