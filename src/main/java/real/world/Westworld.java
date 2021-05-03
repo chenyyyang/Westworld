@@ -36,7 +36,7 @@ public class Westworld {
         farmlandInfo.setFarmlandName("feidong_laomuji");
         government.getVillageOfficial().registeFarmland(farmlandInfo);
         //7.自动重平衡
-        //所有数据都是空的情况下，测试ok
+
 //        2021-05-02 23:02:26 INFO  [main] VillageOfficial:49 - [lookupPopulation] exist:false
 //                /nationName/official is created with data null mode PERSISTENT
 //        2021-05-02 23:02:26 INFO  [main] VillageOfficial:72 - [registeFarmland] laoxiangji_park exist:false
