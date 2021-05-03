@@ -15,6 +15,8 @@
 理论上数据源和server都可以无限水平扩展（数量多了会降低rebalance效率），并行执行任务
 - auto rebalance:  
 简单的hash方案，每个server在自己内部通过hash取模运算后，可以得到相同的数据源分配方案，非常快速
+- 其他：  
+jar包依赖简单（理论上只依赖zk），内存时间轮
 
 ### implementation
 项目分成了三个领域：  
