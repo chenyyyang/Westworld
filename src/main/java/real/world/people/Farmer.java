@@ -24,7 +24,9 @@ public class Farmer extends Thread {
     @Override
     public void run() {
         StaticLog.info("Farmer [{}] start success~gogogo", farmerName);
+
         for (int i = 0; ; i++) {
+            StaticLog.error("Farmer [{}] isInterrupted[{}]", farmerName, isInterrupted());
             if (isInterrupted()) {
                 StaticLog.error("Farmer [{}] Interrupted", farmerName);
                 break;
@@ -57,6 +59,7 @@ public class Farmer extends Thread {
     }
 
     public void afterWork() {
+        StaticLog.error("Farmer [{}] off work", farmerName);
         SimpleDataSource dataSource = farmland.getDataSource();
         if (dataSource != null) {
             dataSource.close();

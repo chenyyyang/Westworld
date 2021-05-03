@@ -13,12 +13,12 @@
 
 ### implementation
 项目分成了三个领域：  
-- 政府StateGovernment：政府是一个抽象的概念，没有具体的行为，是这个社会的组织者，相当于Application
-- 村官VillageOfficial：每台server启动一个注册成临时节点，并执行监听和计算rebalance后负责的db，拿到db后根据负责的db数量为每1个db创建1个的Farmer线程
+- 政府 StateGovernment：政府是一个抽象的概念，没有具体的行为，是这个社会的组织者，相当于Application
+- 村官 VillageOfficial：每台server启动一个注册成临时节点，并执行监听和计算rebalance后负责的db，拿到db后根据负责的db数量为每1个db创建1个的Farmer线程
 可以看出，核心管理工作由他负责
-- 农场Farmland：其实就是各种db的抽象，创建时会保存到zk，然后为每一个农田配一个农民，就像为每一台电脑配一个程序员，是1对1的，土地事实存在的固定的资源，
+- 农场 Farmland：其实就是各种db的抽象，创建时会保存到zk，然后为每一个农田配一个农民，就像为每一台电脑配一个程序员，是1对1的，土地事实存在的固定的资源，
 ，可能增加但是很少会减少,
-- 农民Farmer：用thread实现，去分配到的农田（db）或者工地上工作，具体工作就是把数据表中的数据扫描出来执行，1个Farmer只负责1个db
+- 农民 Farmer：用thread实现，去分配到的农田（db）或者工地上工作，具体工作就是把数据表中的数据扫描出来执行，1个Farmer只负责1个db
 
 为什么要这样抽象？  
 ```

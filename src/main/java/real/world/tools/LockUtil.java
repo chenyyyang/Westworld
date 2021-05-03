@@ -4,12 +4,11 @@ import sun.misc.Unsafe;
 
 import java.lang.reflect.Field;
 
-public class CasUtil {
+public class LockUtil {
 
     private volatile int value;
     private static final Unsafe unsafe;
     private static final long valueOffset;
-    public static CasUtil obj = new CasUtil();
 
     static {
         try {
@@ -17,17 +16,17 @@ public class CasUtil {
             field.setAccessible(true);
             unsafe = (Unsafe) field.get(null);
             valueOffset = unsafe.objectFieldOffset
-                    (CasUtil.class.getDeclaredField("value"));
+                    (LockUtil.class.getDeclaredField("value"));
         } catch (Exception ex) {
             throw new Error(ex);
         }
     }
 
-    public static boolean tryOnce() {
+    public static boolean compareAndSwapInt(LockUtil obj) {
         return unsafe.compareAndSwapInt(obj, valueOffset, 0, 1);
     }
 
-    public static boolean reset() {
+    public static boolean resetValue(LockUtil obj) {
         return unsafe.compareAndSwapInt(obj, valueOffset, 1, 0);
     }
 

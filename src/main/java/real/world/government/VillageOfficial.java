@@ -8,7 +8,7 @@ import lombok.Data;
 import org.apache.zookeeper.CreateMode;
 import real.world.land.Farmland;
 import real.world.people.Farmer;
-import real.world.tools.CasUtil;
+import real.world.tools.LockUtil;
 import real.world.tools.zkClient.ZKClient;
 
 import java.util.Collections;
@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @Data
 public class VillageOfficial {
@@ -80,19 +81,24 @@ public class VillageOfficial {
         return false;
     }
 
+    public static LockUtil obj = new LockUtil();
 
     public void reassigning() {
-        StaticLog.error("[global rebalance] start waiting");
-        if (!CasUtil.tryOnce()) {
-            StaticLog.error("[global rebalance] reject ");
+        if (!LockUtil.compareAndSwapInt(obj)) {
+            StaticLog.error("[global rebalance]cas fail, ignore... ");
             return;
         }
         try {
+            StaticLog.error("[global rebalance]  block waiting to start");
 
+            if (localFarmer.size() > 0) {
+                localFarmer.values().forEach(Farmer::interrupt);
+                StaticLog.error("[global rebalance] end waiting, interrupt Farmers {} ", localFarmer.values().stream().map(Farmer::getFarmerName).collect(Collectors.toList()));
+                localFarmer.clear();
+            }
             //5s拒绝其他 rebalance请求。
-            TimeUnit.SECONDS.sleep(5);
+            TimeUnit.SECONDS.sleep(1);
 
-            StaticLog.error("[global rebalance] begin");
             List<String> nationLands = listNationLand();
             List<String> villageOfficial = listVillageOfficial();
             Collections.sort(villageOfficial);
@@ -104,7 +110,7 @@ public class VillageOfficial {
                 int hashValue = nationLand.hashCode() % villageOfficialCount;
 
                 if (hashValue == selfIndex) {
-                    StaticLog.error(" {} hashValue[{}] self[{}]Index[{}] ->hireFarmerForLand", nationLand, hashValue, this.name, selfIndex);
+                    StaticLog.error(" {} hash:[{}] OfficialSequence[{}] Index[{}] ->hireFarmerForLand", nationLand, hashValue, this.name, selfIndex);
                     Farmer farmer = hireFarmerForLand(nationLand);
                     farmer.start();
                     localFarmer.put(nationLand, farmer);
@@ -114,7 +120,7 @@ public class VillageOfficial {
         } catch (Throwable e) {
             StaticLog.error("[reassigning]error:" + e.getCause().getMessage(), ExceptionUtil.stacktraceToString(e));
         } finally {
-            CasUtil.reset();
+            LockUtil.resetValue(obj);
         }
 
     }
