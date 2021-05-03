@@ -66,8 +66,8 @@ public class Westworld {
     }
 
     /*
-     * 这个用例是模拟 重启
-     * 启动多个 offical，看看是多个offical怎么分配
+     * 这个用例是模拟 重启等情况，动态增加和减少offical
+     * 启动了多个 offical，看看是多个offical怎么分配 一共2个land
      *
      * idea  --> edit run Configurations -->Allow parallel run
      * */
