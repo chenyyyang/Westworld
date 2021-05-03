@@ -6,15 +6,15 @@
 
 ### high light
 - 扩展性:  
-可以支持不同数据源，运行时动态添加数据源
+可以支持不同类型的数据源（mysql mongo redis...），运行时动态添加/减少数据源
 - 高可用:  
-有server宕机的话，该server负责的数据源会自动故障转移给其他server负责（依赖zk）
+集群中有server宕机的话，该server负责的数据源会自动故障转移给其他server负责（依赖zk）
 - 无锁设计:  
 数据源的最小单位可以是mysql-schema或者mysql-table，在系统中统一抽象为land,一个land只会分配给一个framer，天然无锁
 - 水平扩容:  
 理论上数据源和server都可以无限水平扩展（数量多了会降低rebalance效率），并行执行任务
 - auto rebalance:  
-简单的hash方案，每个server在自己内部通过hash取模运算后，可以得到相同的数据源分配方案，非常快速
+每个server感知到集群内server数量变化后，在自己内部通过hash取模运算后，可以算出新的数据源分配方案，非常快速，且算出的分配方案与集群中其他server得到的保持一致
 - 其他：  
 jar包依赖简单（理论上只依赖zk），内存时间轮
 
