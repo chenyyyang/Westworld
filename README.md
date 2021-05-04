@@ -39,7 +39,7 @@ macbook air :i5 8c-16g
 vm参数：-verbose:gc -Xms4000M -Xmx4000M -Xmn3000M -XX:+PrintGCDetails -XX:SurvivorRatio=8
 ```
 测试方法：
-往已经注册的数据源中写入下一个十分钟内要触发的任务数据，正常可以选择kafka-consumer来缓冲数据并写入，这里就用一个小脚本来跑进db即可  
+往已经注册的数据源中写入10分钟后，要触发的任务数据，正常可以选择kafka-consumer来写入，这里就用一个小脚本Westworld.case3()来跑进db  
 项目启动后会扫描到这些任务数据并触发他们，触发后记录每个任务触发的延时，以此找到系统的任务执行阈值
 ```
 2021-05-04 16:55:20 INFO  [Hashed wheel timer #2] PerformanceTestingConsole:59 - successCount[5179] totalTask[5179] totalDelayTimeMs[240249]
@@ -47,12 +47,13 @@ task id:11175 abs:45
 
 2021-05-04 17:02:27 INFO  [Hashed wheel timer #2] PerformanceTestingConsole:59 - successCount[18000] totalTask[18000] totalDelayTimeMs[1111007]
   task id:23991 abs:67
-
-10分钟触发18000个task看来没有什么阻塞，压力比较小，但也有问题
-Hashed wheel timer #1 和 Hashed wheel timer #2 看日志是轮流执行
-时间轮上都是相对于addTask延迟多长时间，添加延时很长时间 的任务时 延时精度会受到影响，这也受到初始化参数的影响
-
 ```
+10分钟触发36000个task（每个线程18000）看来没有什么阻塞，全部可以ontimeExcute，包含打印log，异步：updateStatus=1    
+还存在的问题   
+Hashed wheel timer #1 和 Hashed wheel timer #2 看日志是轮流执行，  
+时间轮上都是相对于addTask延迟多长时间，添加延时很长时间 的任务时 延时精度会受到影响，初始化参数必须为毫秒级别。  
+
+
 
 
 
