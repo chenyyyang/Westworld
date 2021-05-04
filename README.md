@@ -78,6 +78,15 @@ git clone https://github.com/chenyyyang/Westworld
 
 
 ### Q&A
+写入倾斜问题，虽然可以均匀写db，但是可能存在某一个db上存的数据非常集中，导致负责那个db的Farmer变慢。
+```
+写入数据时应该按照触发时间分片
+```
+rebalance过程中，需要close之前的数据源并且和新的数据源建立连接，并且重新开始扫描数据，这个过程消耗太大
+```
+todo：实现有记忆有粘性的rebalance
+```
+
 为什么要这样抽象？  
 ```
 刚学Java的开始就知道Java是面向对象的语言，可以用代码来描写真实世界的行为。
