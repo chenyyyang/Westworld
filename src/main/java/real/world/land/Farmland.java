@@ -22,7 +22,7 @@ public class Farmland implements NationLand {
     @Data
     public static class FarmlandInfo {
         private String farmlandName = "laoxiangji_park";
-        private String url = "jdbc:mysql://localhost:3306/westworld";
+        private String url = "jdbc:mysql://localhost:3306/westworld?useUnicode=true&characterEncoding=UTF-8";
         private String username = "root";
         private String password = "12345678";
     }

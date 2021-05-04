@@ -1,13 +1,23 @@
 package real.world;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.RandomUtil;
+import cn.hutool.db.Db;
+import cn.hutool.db.Entity;
+import cn.hutool.db.ds.simple.SimpleDataSource;
+import org.jboss.netty.util.HashedWheelTimer;
+import org.jboss.netty.util.Timeout;
+import org.jboss.netty.util.Timer;
+import org.jboss.netty.util.TimerTask;
 import real.world.government.StateGovernment;
 import real.world.land.Farmland;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 public class Westworld {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws Exception {
         case2();
         new CountDownLatch(1).await();
     }
@@ -136,5 +146,62 @@ public class Westworld {
 //        2021-05-03 08:24:28 ERROR [t_workFor_laoxiangji_park] Farmer:39 - Farmer [workFor_laoxiangji_park] workLoop[0] Cost 1004 ms
 //        2021-05-03 08:24:28 ERROR [t_workFor_feidong_laomuji] Farmer:39 - Farmer [workFor_feidong_laomuji] workLoop[0] Cost 1003 ms
 
+    }
+
+    public static void case3() throws Exception {
+        //先插入数据
+        Farmland.FarmlandInfo info = new Farmland.FarmlandInfo();
+        SimpleDataSource simpleDataSource1 = new SimpleDataSource(info.getUrl(), info.getUsername(), info.getPassword());
+
+        long nowSeconds = System.currentTimeMillis() / 1000;
+        nowSeconds = nowSeconds + 10 * 60;//加10分钟
+
+        for (int i = 0; i < 600; i++) {
+            nowSeconds++;
+            for (int j = 0; j < 30; j++) {
+                Db.use(simpleDataSource1).insert(
+                        Entity.create("farmland").set("task", RandomUtil.randomString(50))
+                                .set("fire_time", nowSeconds)
+                                .set("status", 0)
+                );
+            }
+        }
+
+        simpleDataSource1.close();
+
+        Farmland.FarmlandInfo farmlandInfo = new Farmland.FarmlandInfo();
+        farmlandInfo.setUrl("jdbc:mysql://localhost:3306/newland?useUnicode=true&characterEncoding=UTF-8");
+        farmlandInfo.setFarmlandName("feidong_laomuji");
+        SimpleDataSource simpleDataSource2 = new SimpleDataSource(farmlandInfo.getUrl(), farmlandInfo.getUsername(), farmlandInfo.getPassword());
+
+        for (int i = 0; i < 600; i++) {
+            nowSeconds++;
+            for (int j = 0; j < 30; j++) {
+                Db.use(simpleDataSource2).insert(
+                        Entity.create("farmland").set("task", RandomUtil.randomString(50))
+                                .set("fire_time", nowSeconds)
+                                .set("status", 0)
+                );
+            }
+        }
+
+        simpleDataSource2.close();
+    }
+
+    public static void testWheelTimer() {
+        //        2021-05-04 16:23:43
+//        2021-05-04 16:23:47
+//        2021-05-04 16:23:47
+//        2021-05-04 16:23:47
+        final Timer timer = new HashedWheelTimer();
+        System.out.println(DateUtil.now());
+        for (int i = 0; i < 3; i++) {
+            timer.newTimeout(new TimerTask() {
+                @Override
+                public void run(Timeout timeout) throws Exception {
+                    System.out.println(DateUtil.now());
+                }
+            }, 3, TimeUnit.SECONDS);
+        }
     }
 }

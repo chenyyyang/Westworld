@@ -35,6 +35,7 @@ public class VillageOfficial {
         this.zkClient = zkClient;
     }
 
+
     public void registeSelf() {
         String localhostStr = NetUtil.getLocalhostStr() + "_" + NetUtil.getUsableLocalPort();
         //注册临时节点
@@ -96,8 +97,8 @@ public class VillageOfficial {
                 StaticLog.error("[global rebalance] end waiting, interrupt Farmers {} ", localFarmer.values().stream().map(Farmer::getFarmerName).collect(Collectors.toList()));
                 localFarmer.clear();
             }
-            //5s拒绝其他 rebalance请求。
-            TimeUnit.SECONDS.sleep(1);
+            //3s拒绝其他 rebalance请求。
+            TimeUnit.SECONDS.sleep(3);
 
             List<String> nationLands = listNationLand();
             List<String> villageOfficial = listVillageOfficial();
@@ -118,7 +119,7 @@ public class VillageOfficial {
             }
 
         } catch (Throwable e) {
-            StaticLog.error("[reassigning]error:" + e.getCause().getMessage(), ExceptionUtil.stacktraceToString(e));
+            StaticLog.error("[reassigning]error:{}", ExceptionUtil.stacktraceToString(e));
         } finally {
             LockUtil.resetValue(obj);
         }
@@ -140,5 +141,11 @@ public class VillageOfficial {
 
     public List<String> listNationLand() {
         return zkClient.getChildren(LAND, false);
+    }
+
+    public void surrender() {
+        if (localFarmer.size() > 0) {
+            localFarmer.values().forEach(Farmer::interrupt);
+        }
     }
 }

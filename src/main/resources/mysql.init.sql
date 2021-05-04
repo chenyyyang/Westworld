@@ -1,7 +1,7 @@
 -- westworld.farmland definition
 
 CREATE TABLE `farmland` (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `fire_time` bigint NOT NULL,
   `task` varchar(500) NOT NULL DEFAULT '',
   `status` tinyint NOT NULL DEFAULT '0',

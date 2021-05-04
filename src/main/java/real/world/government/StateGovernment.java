@@ -25,6 +25,9 @@ public class StateGovernment {
 
         buildNation();
 
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            surrender(zkClient);
+        }));
     }
 
     public void buildNation() {
@@ -43,4 +46,11 @@ public class StateGovernment {
         return instance;
     }
 
+    private void surrender(ZKClient zkClient) {
+        try {
+            zkClient.close();
+            villageOfficial.surrender();
+        } catch (Throwable e) {
+        }
+    }
 }
