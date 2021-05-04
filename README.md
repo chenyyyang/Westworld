@@ -62,6 +62,11 @@ brew services start zookeeper
 zkServer status
 ```
 安装database(可选)
+```angular2
+mysql-community-server 8.0
+执行 mysql.init.sql
+Farmland.FarmlandInfo中配置 url username password
+```
 
 git clone https://github.com/chenyyyang/Westworld
 
