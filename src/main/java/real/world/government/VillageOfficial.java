@@ -111,7 +111,7 @@ public class VillageOfficial {
                 int hashValue = nationLand.hashCode() % villageOfficialCount;
 
                 if (hashValue == selfIndex) {
-                    StaticLog.error(" {} hash:[{}] OfficialSequence[{}] Index[{}] ->hireFarmerForLand", nationLand, hashValue, this.name, selfIndex);
+                    StaticLog.error(" {} hash:[{}] OfficialSequence[{}] Index[{}] ->hireFarmerForLand:{}", nationLand, hashValue, this.name, selfIndex, nationLand);
                     Farmer farmer = hireFarmerForLand(nationLand);
                     farmer.start();
                     localFarmer.put(nationLand, farmer);
