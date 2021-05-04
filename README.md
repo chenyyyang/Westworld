@@ -18,6 +18,7 @@
 理论上数据源和server都可以无限水平扩展（数量多了会降低rebalance效率），并行执行任务
 - auto rebalance:  
 每个server感知到集群内server数量变化后，获取最新的节点情况，在自己内部通过hash取模运算，计算出自己负责的数据源，这个过程非常快速，且server内算出的分配结果与集群中其他server算出的都一致
+所以无需controller或者election
 - 其他：  
 依赖简单（理论上只依赖zk），内存时间轮
 
