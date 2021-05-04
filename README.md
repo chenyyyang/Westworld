@@ -2,7 +2,7 @@
 
 ### brief introduction
 这是一个分布式延时调度框架,目前是第一个demo版本  
-[掘金原文地址](https://juejin.cn/post/6951905809617911845)
+[掘金博客地址](https://juejin.cn/post/6951905809617911845)
 
 ### high light
 - 扩展性:  
@@ -14,23 +14,20 @@
 - 水平扩容:  
 理论上数据源和server都可以无限水平扩展（数量多了会降低rebalance效率），并行执行任务
 - auto rebalance:  
-每个server感知到集群内server数量变化后，在自己内部通过hash取模运算后，可以算出新的数据源分配方案，非常快速，且算出的分配方案与集群中其他server得到的保持一致，
-高端的食材只需要简单的烹饪方式，这里也是很朴素的实现。
+每个server感知到集群内server数量变化后，获取最新的节点情况，在自己内部通过hash取模运算，计算出自己负责的数据源，这个过程非常快速，且server内算出的分配结果与集群中其他server算出的都一致
 - 其他：  
-jar包依赖简单（理论上只依赖zk），内存时间轮
+依赖简单（理论上只依赖zk），内存时间轮
 
 ### implementation
 项目分成了三个领域： 
 这个故事是一个个Farmer去自己负责的农场land上干活，Farmer负责哪个农场则是由VillageOfficial来分配的。  
 
-- 政府 StateGovernment：政府是一个抽象的概念，没有具体的行为，是这个社会的组织者，相当于Application
-- 村官 VillageOfficial：每台server启动一个注册成临时节点，并执行监听和计算rebalance后负责的db，拿到db后根据负责的db数量为每1个db创建1个的Farmer线程
+- 政府 StateGovernment：政府是一个抽象的概念，没有具体的行为，相当于Application
+- 村官 VillageOfficial：每台server启动一个Official注册成临时节点，并通过zk监听，本地计算rebalance后负责的db，拿到db后根据负责的db数量为每1个db创建1个的Farmer线程
 可以看出，核心管理工作由他负责
-- 农场 Farmland：其实就是各种db的抽象，创建时会保存到zk，然后为每一个农田配一个农民，就像为每一台电脑配一个程序员，是1对1的。操作数据源的动作（ddl dml）与server工作逻辑解耦,
+- 农场 Farm land：其实就是各种db的抽象，创建时会保存到zk，然后为每一个农田配一个农民，就像为每一台电脑配一个程序员，是1对1的。操作数据源的动作（ddl dml）与server工作逻辑解耦,
 意味着故障转移不会迁移db中的数据，不维护db的可靠性
-- 农民 Farmer：用thread实现，去分配到的农田（db）或者工地上工作，具体工作就是把数据表中的数据扫描出来执行，1个Farmer只负责1个db
-
-
+- 农民 Farmer：用thread实现，去分配到的农田（db）上工作，具体工作就是把数据表中的数据扫描出来执行，1个Farmer只负责1个db
 
 ### performance
 ```
