@@ -25,7 +25,6 @@
 ### implementation
 项目分成了三个领域： 
 这个故事是一个个Farmer去自己负责的农场land上干活，Farmer负责哪个农场则是由VillageOfficial来分配的。  
-![image](https://user-images.githubusercontent.com/22273370/116992504-b2709b80-ad08-11eb-83cf-5a908009f752.png)
 
 - 政府 StateGovernment：政府是一个抽象的概念，没有具体的行为，相当于Application
 - 村官 VillageOfficial：每台server启动一个Official注册成临时节点，并通过zk监听，本地计算rebalance后负责的db，拿到db后根据负责的db数量为每1个db创建1个的Farmer线程
@@ -34,6 +33,7 @@
 意味着故障转移不会迁移db中的数据，不维护db的可靠性
 - 农民 Farmer：用thread实现，去分配到的农田（db）上工作，具体工作就是把数据表中的数据扫描出来执行，1个Farmer只负责1个db
 ![image](https://user-images.githubusercontent.com/22273370/116993215-bbae3800-ad09-11eb-8f0a-64b0aeda36d9.png)
+![image](https://user-images.githubusercontent.com/22273370/116992504-b2709b80-ad08-11eb-83cf-5a908009f752.png)
 
 ### performance
 ```
