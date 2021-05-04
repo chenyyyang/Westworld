@@ -50,7 +50,7 @@ task id:11175 abs:45
 ```
 10分钟触发36000个task（每个线程18000）看来没有什么阻塞，全部可以ontimeExcute，包含打印log，异步：updateStatus=1    
 还存在的问题   
-Hashed wheel timer #1 和 Hashed wheel timer #2 看日志是轮流执行，  
+设计的是每个线程一个时间轮，Hashed wheel timer #1 和 Hashed wheel timer #2 看日志是轮流执行，共享了线程  
 时间轮上都是相对于addTask()的时间往后延迟一定时间，如果添加延时很长时间 的任务时 延时精度会受到影响，而且初始化参数必须为毫秒级别。  
 
 
