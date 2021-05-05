@@ -32,7 +32,8 @@
 - 农场 Farm land：其实就是各种db的抽象，创建时会保存到zk，然后为每一个农田配一个农民，就像为每一台电脑配一个程序员，是1对1的。操作数据源的动作（ddl dml）与server工作逻辑解耦,
 意味着故障转移不会迁移db中的数据，不维护db的可靠性
 - 农民 Farmer：用thread实现，去分配到的农田（db）上工作，具体工作就是把数据表中的数据扫描出来执行，1个Farmer只负责1个db
-![image](https://user-images.githubusercontent.com/22273370/116991518-3de92d00-ad07-11eb-95ad-5690405451f6.png)
+![image](https://user-images.githubusercontent.com/22273370/116993215-bbae3800-ad09-11eb-8f0a-64b0aeda36d9.png)
+![image](https://user-images.githubusercontent.com/22273370/116992504-b2709b80-ad08-11eb-83cf-5a908009f752.png)
 
 ### performance
 ```
@@ -77,6 +78,15 @@ git clone https://github.com/chenyyyang/Westworld
 
 
 ### Q&A
+写入倾斜问题，虽然可以均匀写db，但是可能存在某一个db上存的数据非常集中，导致负责那个db的Farmer变慢。
+```
+写入数据时应该按照触发时间分片
+```
+rebalance过程中，需要close之前的数据源并且和新的数据源建立连接，并且重新开始扫描数据，这个过程消耗太大
+```
+todo：实现有记忆有粘性的rebalance
+```
+
 为什么要这样抽象？  
 ```
 刚学Java的开始就知道Java是面向对象的语言，可以用代码来描写真实世界的行为。
