@@ -1,7 +1,7 @@
 # Westworld
 
 ### brief introduction
-这是一个分布式延时调度框架,目前是第一个demo版本。[掘金博客地址](https://juejin.cn/post/6951905809617911845)   
+这是一个分布式延时调度框架,目前是第一个demo版本。[博客地址](https://github.com/chenyyyang/chenyyyang/blob/main/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E5%BB%B6%E8%BF%9F%E6%B6%88%E6%81%AF.md)   
 业务中很多地方都需要延时任务调度。  
 有的任务是周期性执行，比如每隔半小时更新本地缓存数据  
 有的任务是延迟执行一次，比如订单15分钟未付款提醒，优惠券到期提醒  
